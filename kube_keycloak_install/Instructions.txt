@@ -1,0 +1,8 @@
+- create folder for pv
+ - kubectl label node *node-name* storage=mysqlKey  -this is for setting node affinity for local volume     
+ - apply volue and volume claim
+ - apply keycloakSecrets 
+ - apply sql deployment
+ - create database : 1) kubectl exec --stdin --tty [pod_name] -- /bin/bash 2)mysql -p 3)create database mysqlkey;
+ - apply keycloack deployment
+ - apply ingress

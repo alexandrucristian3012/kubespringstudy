@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysqlkey
+spec:
+  selector:
+    matchLabels:
+      app: mysqlkey
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysqlkey
+    spec:
+      containers:
+      - image: mysql:latest
+        name: mysqlkey
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysqlkey-secret
+              key: password
+        ports:
+        - containerPort: 3306
+          name: mysqlkey
+        volumeMounts:
+        - name: mysqlkey-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysqlkey-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysqlkey-pv-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+spec:
+  ports:
+  - port: 3306
+  selector:
+    app: mysqlkey
