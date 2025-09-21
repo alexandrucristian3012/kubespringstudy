@@ -2,7 +2,6 @@ package com.example.firstApp.job;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.PathVariable;
 
 public interface JobService {
 	public List<Job> findAll();
