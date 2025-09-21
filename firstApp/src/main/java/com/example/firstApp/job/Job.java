@@ -1,6 +1,16 @@
 package com.example.firstApp.job;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+//@Table(name = "job_table")
 public class Job {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String title;
 	private String description;
@@ -8,6 +18,10 @@ public class Job {
 	private String maxSalary;
 	private String location;
 	
+	public Job() {
+		super();
+	}
+
 	public Job(Long id, String title, String description, String minSalary, String maxSalary, String location) {
 		super();
 		this.id = id;
