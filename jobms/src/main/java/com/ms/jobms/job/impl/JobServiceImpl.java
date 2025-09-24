@@ -1,13 +1,13 @@
-package com.example.firstApp.job.impl;
+package com.ms.jobms.job.impl;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.example.firstApp.job.Job;
-import com.example.firstApp.job.JobRepository;
-import com.example.firstApp.job.JobService;
+import com.ms.jobms.job.Job;
+import com.ms.jobms.job.JobRepository;
+import com.ms.jobms.job.JobService;
 
 @Service
 public class JobServiceImpl implements JobService {
