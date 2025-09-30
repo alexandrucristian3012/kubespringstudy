@@ -21,6 +21,10 @@ import com.ms.jobms.job.external.Review;
 import com.ms.jobms.job.feignClients.CompanyClient;
 import com.ms.jobms.job.feignClients.ReviewClient;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.github.resilience4j.retry.annotation.Retry;
+
 @Service
 public class JobServiceImpl implements JobService {
 
@@ -39,9 +43,18 @@ public class JobServiceImpl implements JobService {
 	}
 
 	@Override
+	@CircuitBreaker(name = "companyBreaker", fallbackMethod = "companyBreakerFallback")
+//	@Retry(name = "companyBreaker", fallbackMethod = "companyBreakerFallback")
+//	@RateLimiter(name = "companyBreaker", fallbackMethod = "companyBreakerFallback")
 	public List<JobDTO> findAll() {
 		List<Job> jobs = jobRepository.findAll();
 		return jobs.stream().map(this::convertJobToDto).collect(Collectors.toList());
+	}
+	
+	public List<String> companyBreakerFallback() {
+		List<String> list = new ArrayList<>();
+		list.add("Fallback");
+		return list;
 	}
 	
 	/**
