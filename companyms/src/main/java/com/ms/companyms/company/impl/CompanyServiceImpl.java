@@ -8,13 +8,12 @@ import org.springframework.stereotype.Service;
 import com.ms.companyms.company.Company;
 import com.ms.companyms.company.CompanyRepository;
 import com.ms.companyms.company.CompanyService;
+import com.ms.companyms.company.dto.ReviewMessage;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
 
 	private CompanyRepository companyRepository;
-	
-	
 	
 	public CompanyServiceImpl(CompanyRepository companyRepository) {
 		super();
@@ -58,6 +57,11 @@ public class CompanyServiceImpl implements CompanyService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void updateCompanyRating(ReviewMessage reviewMessage) {
+		
 	}
 
 }

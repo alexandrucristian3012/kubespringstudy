@@ -14,14 +14,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ms.reviewms.review.messaging.ReviewMessageProducer;
+
 @RestController
 @RequestMapping("/reviews")
 public class ReviewController {
 	private ReviewService reviewService;
+	private ReviewMessageProducer reviewMessageProducer;
+	
 
-	public ReviewController(ReviewService reviewService) {
+	public ReviewController(ReviewService reviewService, ReviewMessageProducer reviewMessageProducer) {
 		super();
 		this.reviewService = reviewService;
+		this.reviewMessageProducer = reviewMessageProducer;
 	}
 
 	@GetMapping()
@@ -31,7 +36,9 @@ public class ReviewController {
 
 	@PostMapping()
 	public ResponseEntity<String> addReview(@RequestParam Long companyId, @RequestBody Review review) {
-		if (reviewService.addReview(companyId, review)) {
+		boolean isReviewSaved = reviewService.addReview(companyId, review);
+		reviewMessageProducer.sendMessage(review);
+		if (isReviewSaved) {
 			return new ResponseEntity<String>("Review added succesfully.", HttpStatus.OK);
 		}
 		return new ResponseEntity<String>("Review not saved, company not found", HttpStatus.NOT_FOUND);
