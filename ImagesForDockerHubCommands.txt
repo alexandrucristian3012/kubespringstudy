@@ -1,0 +1,8 @@
+mvn spring-boot:build-image "-Dspring-boot.build-image.imageName=alxcr/servicereg"
+
+mvn spring-boot:build-image "-Dspring-boot.build-image.imageName=alxcr/companyms"
+mvn spring-boot:build-image "-Dspring-boot.build-image.imageName=alxcr/reviewms"
+mvn spring-boot:build-image "-Dspring-boot.build-image.imageName=alxcr/jobms"
+
+mvn spring-boot:build-image "-Dspring-boot.build-image.imageName=alxcr/gateway-ms"
+mvn spring-boot:build-image "-Dspring-boot.build-image.imageName=alxcr/config-server-ms"

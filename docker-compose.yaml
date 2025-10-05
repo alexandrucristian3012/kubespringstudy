@@ -41,8 +41,87 @@ services:
       - 5672:5672
       - 15672:15672
     networks:
-      - postgres            
+      - postgres
+  config-server-ms:
+    image: alxcr/config-server-ms:latest
+    container_name: config-server-ms
+    ports:
+      - 8080:8080
+    depends_on:
+      -servicereg
+    networks:
+      - microservice-network
+      - postgres
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker        
+  servicereg:
+    image: alxcr/servicereg:latest
+    container_name: servicereg
+    ports:
+      - 8761:8761
+    depends_on:
+      - rabbitmq
+      - zipkin
+      - postgres_container
+      - pgadmin_container
+    networks:
+      - microservice-network
+      - postgres
+  companyms:
+    image: alxcr/companyms:latest
+    container_name: company
+    ports:
+      - 8081:8081
+    depends_on:
+      - servicereg
+      - config-server-ms  
+    networks:
+      - microservice-network
+      - postgres
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker  
+  jobms: 
+    image: alxcr/jobsms:latest
+    container_name: job
+    ports:
+      - 8082:8082
+    depends_on:
+      - servicereg
+      - config-server-ms  
+    networks:
+      - microservice-network
+      - postgres
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://servicereg:8761/eureka
+  reviewms: 
+    image: alxcr/reviewms:latest
+    container_name: review
+    ports:
+      - 8083:8083
+    depends_on:
+      - servicereg
+      - config-server-ms  
+    networks:
+      - microservice-network
+      - postgres
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker   
+  gateway-ms:
+    image: alxcr/gateway-ms:latest
+    ports:
+      - 8084:8084
+    depends_on:
+      - servicereg
+    networks:
+      - microservice-network
+      - postgres
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker    
+
 networks:
+  microservice-network:
+    driver: bridge
   postgres:
     driver: bridge
     
