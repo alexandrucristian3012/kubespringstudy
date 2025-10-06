@@ -48,7 +48,7 @@ services:
     ports:
       - 8080:8080
     depends_on:
-      -servicereg
+      - servicereg
     networks:
       - microservice-network
       - postgres
@@ -62,8 +62,8 @@ services:
     depends_on:
       - rabbitmq
       - zipkin
-      - postgres_container
-      - pgadmin_container
+      - postgres
+      - pgadmin
     networks:
       - microservice-network
       - postgres
