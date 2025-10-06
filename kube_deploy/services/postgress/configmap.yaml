@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+data:
+  POSTGRESS_DB: embarkx
+  POSTGRESS_USER: embarkx
+  POSTGRESS_PASSWORD: embarkx  
