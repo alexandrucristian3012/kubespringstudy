@@ -3,6 +3,6 @@ kind: ConfigMap
 metadata:
   name: postgres-config
 data:
-  POSTGRESS_DB: embarkx
-  POSTGRESS_USER: embarkx
-  POSTGRESS_PASSWORD: embarkx  
+  POSTGRES_DB: embarkx
+  POSTGRES_USER: embarkx
+  POSTGRES_PASSWORD: embarkx  
