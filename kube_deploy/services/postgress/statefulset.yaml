@@ -36,12 +36,3 @@ spec:
       - name: postgres-persistent-storage
         persistentVolumeClaim:
           claimName: postgres-pv-claim    
-  volumeClaimTemplates:
-    - metadata:
-        name: postgres-data
-      spec:
-        accessModes: [ "ReadWriteOnce" ]
-        resources:
-          requests:
-            storage: 500Mi  
-
