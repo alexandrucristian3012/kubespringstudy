@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: review
-          image: alxcr/reviewyms:latest
+          image: alxcr/reviewms:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8083  
