@@ -17,7 +17,7 @@ spec:
           image: alxcr/reviewyms:latest
           imagePullPolicy: Always
           ports:
-            -containerPort: 8083  
+            - containerPort: 8083  
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: k8s
