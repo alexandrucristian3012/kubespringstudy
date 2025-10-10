@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: job
-          image: alxcr/jobsms:latest
+          image: alxcr/jobms:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8082  
