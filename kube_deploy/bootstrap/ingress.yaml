@@ -24,7 +24,7 @@ spec:
              name: review
              port:
                number: 80        
-       - path: /companys
+       - path: /companies
          pathType: Prefix
          backend:
            service:
