@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: microservices-ingress
+  namespace: test
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefix
+spec:
+  rules:
+    - http:
+       paths:
+       - path: /jobs
+         pathType: Prefix
+         backend:
+           service:
+             name: job
+             port:
+               number: 80
+       - path: /reviews
+         pathType: Prefix
+         backend:
+           service:
+             name: review
+             port:
+               number: 80        
+       - path: /companys
+         pathType: Prefix
+         backend:
+           service:
+             name: company
+             port:
+               number: 80 
+                            
